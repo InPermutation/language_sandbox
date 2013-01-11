@@ -15,5 +15,6 @@ Guidelines
 4. The complexity of the problems should discourage solutions by brute force.
 5. All entries should follow the tenants of good style for their language.
 6. Clarity is more important than speed or efficiency.
+
 > Although you may include more elegant entries alongside a clear example.
 
