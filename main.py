@@ -3,4 +3,4 @@
 import os
 
 def path():
-	return os.path.dirname(__file__)
+    return os.path.dirname(__file__)
