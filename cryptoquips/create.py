@@ -5,12 +5,12 @@ from collections import defaultdict
 import os
 import random
 
-import root
+import main
 
 from string import ascii_uppercase, maketrans
 
 def word_list():
-    return open(os.path.join(root.path(),'common_words.txt')).read().split('\n')
+    return open(os.path.join(main.path(),'common_words.txt')).read().split('\n')
 
 def word_dict():
     """keys are len(word), values are words that are that length"""
