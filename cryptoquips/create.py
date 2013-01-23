@@ -23,11 +23,11 @@ def cryptoquip(quip):
     """a puzzle as a short piece of encrypted text, returned in uppercase"""
     return quip.upper().translate(_trans_table())
 
-def digit_replace(word):
-    """map a unique digit to a unique letter in word. 'EGGS' -> '0112'"""
+def min_replacement(word):
+    """map a unique [A-Z] char to a unique letter in word. 'EGGS' -> 'ABBC'"""
     u_word = _unique_word(word)
-    with_digits = maketrans(u_word, ''.join(map(str, range(len(u_word)))))
-    return word.translate(with_digits)
+    with_alpha = maketrans(u_word, ascii_uppercase[:len(u_word)])
+    return word.translate(with_alpha)
 
 
 def _trans_table():
