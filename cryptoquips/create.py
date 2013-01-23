@@ -19,6 +19,14 @@ def word_dict():
         word_dict[len(word)].append(word)
     return word_dict
 
+def min_word_dict():
+    """like word_dict(), but minified by min_replacement()"""
+    min_dict = defaultdict(list)
+    for word_size in word_dict().values():
+        for word in word_size:
+            min_dict[min_replacement(word)].append(word)
+    return min_dict
+
 def cryptoquip(quip):
     """a puzzle as a short piece of encrypted text, returned in uppercase"""
     return quip.upper().translate(_trans_table())
