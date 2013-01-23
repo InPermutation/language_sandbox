@@ -1,13 +1,13 @@
 #! /usr/bin/env python
 
-from collections import defaultdict
-
 import os
 import random
 
-import main
-
+from collections import defaultdict
+from itertools import chain
 from string import ascii_uppercase, maketrans
+
+import main
 
 def word_list():
     return open(os.path.join(main.path(),'common_words.txt')).read().split('\n')
