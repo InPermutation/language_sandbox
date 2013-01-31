@@ -29,7 +29,7 @@ def min_word_dict():
 
 def cryptoquip(quip):
     """a puzzle as a short piece of encrypted text, returned in uppercase"""
-    return quip.upper().translate(_trans_table())
+    return quip.upper().translate(_random_trans_table())
 
 def min_replacement(word):
     """map a unique [A-Z] char to a unique letter in word. 'EGGS' -> 'ABBC'"""
@@ -38,7 +38,7 @@ def min_replacement(word):
     return word.translate(with_alpha)
 
 
-def _trans_table():
+def _random_trans_table():
     """create a random translation table from an uppercase English alphabet"""
     uppers = list(ascii_uppercase)
     random.shuffle(uppers)
