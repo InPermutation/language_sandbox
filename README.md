@@ -9,9 +9,9 @@ There are two text files containing words of the English language included in th
 Guidelines
 ----------
 
-1. Please make a fork for your langague to put your work on if you plan on doing a pull request.
+1. Please make a fork for your language to put your work on if you plan on doing a pull request.
 2. Entries that include unit tests are always a good idea.
-3. All entries should follow the tenants of good style for their language.
+3. All entries should follow the tenets of good style for their language.
 4. Clarity is more important than speed or efficiency.
 
 > Although you may include more elegant entries alongside a clear example.
