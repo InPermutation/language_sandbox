@@ -1,5 +1,5 @@
 
-> [Counting Point Mutations](http://rosalind.info/problems/rna/)
+> [Counting Point Mutations](http://rosalind.info/problems/hamm/)
 > ------------------------------------------
 
 

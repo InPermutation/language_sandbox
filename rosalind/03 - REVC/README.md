@@ -1,5 +1,5 @@
 
-> [Complementing a Strand of DNA](http://rosalind.info/problems/rna/)
+> [Complementing a Strand of DNA](http://rosalind.info/problems/revc/)
 > ------------------------------------------
 
 

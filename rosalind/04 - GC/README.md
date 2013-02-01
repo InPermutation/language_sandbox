@@ -1,5 +1,5 @@
 
-> [Computing GC Content](http://rosalind.info/problems/rna/)
+> [Computing GC Content](http://rosalind.info/problems/gc/)
 > ------------------------------------------
 
 
