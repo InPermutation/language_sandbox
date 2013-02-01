@@ -1,3 +1,5 @@
-Roalind is a website with basic exercises geared towards teaching biology students programming.
+Rosalind is a platform for learning bioinformatics through problem solving.
 
-It is also handy for learning functional programming, since the questions are pretty easy.
+It is also handy for learning functional programming, since the questions start pretty easy.
+
+http://rosalind.info/problems/list-view/
