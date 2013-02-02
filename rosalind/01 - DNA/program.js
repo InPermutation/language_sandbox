@@ -71,7 +71,10 @@ var _ = function(l){ return function(){ return l; } };
 
 // Everything else can be derived from the axioms
 // Numbers!
-var ZERO = module.exports.ZERO = FALSE;
+var ZERO = module.exports.ZERO = function ZERO(n){ return n; }
+var IS_ZERO = module.exports.IS_ZERO = function IS_ZERO(i) {
+    return EQUAL(i, ZERO);
+}
 var INCR = module.exports.INCR = function INCR(l) {
     return function _CHURCH_NUMERAL() { return l; };
 }
@@ -84,7 +87,7 @@ var THREE=INCR(TWO);
 var FOUR= INCR(THREE);
 
 // Lists!
-var NIL = module.exports.NIL = FALSE;
+var NIL = module.exports.NIL = function NIL(n){ return n; };
 var IS_NIL = module.exports.IS_NIL = function IS_NIL(v) {
     return EQUAL(v, NIL);
 }
@@ -109,13 +112,13 @@ var REDUCE = module.exports.REDUCE = function REDUCE(fxn, v, list) {
 
 // this does the functional equivalent of list[index]++;
 var INCR_AT = module.exports.INCR_AT = function INCR_AT(index, list) {
-    return IS_NIL(index)(
+    return IS_ZERO(index)(
             function _FOUND(){ return CONS(INCR(CAR(list)), CDR(list)); },
             function _NOTYET(){ return CONS(CAR(list), INCR_AT(DECR(index), CDR(list))); });
 }
 // In ruby, this would be num.times { ctor }
 var REPEAT = module.exports.REPEAT = function REPEAT(num, ctor) {
-    return IS_NIL(num)(
+    return IS_ZERO(num)(
             _(NIL),
             function(){ return CONS(ctor(), REPEAT(DECR(num), ctor)); });
 }
