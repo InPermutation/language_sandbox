@@ -33,6 +33,17 @@ var ptol = module.exports.ptol = function ptol(p) {
     }
     return l;
 }
+var ptos = module.exports.ptos = function ptos(p) {
+    var s = '';
+    while(p !== NIL) {
+        s += CAR(p);
+        p = CDR(p);
+    }
+    return s;
+}
+var stop = module.exports.stop = function stop(s) {
+    return ltop(s.split(''));
+}
 
 // Axiom
 var AXIOM_EQUAL = module.exports.AXIOM_EQUAL = function AXIOM_EQUAL(a, b, t, f) {
