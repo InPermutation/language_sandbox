@@ -71,6 +71,12 @@ var TWO = module.exports.TWO = INCR(ONE);
 var THREE=module.exports.THREE=INCR(TWO);
 var FOUR= module.exports.FOUR =INCR(THREE);
 
+var ADD = module.exports.ADD = function ADD(a, b) {
+    return IS_ZERO(a)(
+        _(b),
+        function() { return ADD(DECR(a), INCR(b)); });
+}
+
 // Lists!
 var NIL = module.exports.NIL = function NIL(n){ return n; };
 var IS_NIL = module.exports.IS_NIL = function IS_NIL(v) {
@@ -116,4 +122,14 @@ var REPEAT = module.exports.REPEAT = function REPEAT(num, ctor) {
 
 var REVERSE = module.exports.REVERSE = function REVERSE(list) {
     return REDUCE(function(rval, cur) { return CONS(cur, rval); }, NIL, list);
+}
+
+var ZIP = module.exports.ZIP = function ZIP(l, r) {
+    return IS_NIL(l)(
+        _(NIL),
+        function() {
+            return CONS(
+                CONS( CAR(l), CONS(CAR(r), NIL)),
+                ZIP(CDR(l), CDR(r)));
+        });
 }

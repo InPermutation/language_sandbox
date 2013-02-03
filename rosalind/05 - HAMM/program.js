@@ -15,16 +15,13 @@ process.stdin.on('end', function() {
 
 var _ = function(x) { return function() { return x; } }
 
-function HAMMING(a, b, r) {
-    return f.IS_NIL(a)(
-        _(r),
-        function() { 
-            return f.EQUAL(f.CAR(a), f.CAR(b))(
-                function() { return HAMMING(f.CDR(a), f.CDR(b), r); },
-                function() { return HAMMING(f.CDR(a), f.CDR(b), f.INCR(r)); })
-        });
+function HAMMING(pair) {
+    return f.EQUAL(f.CAR(pair), f.CAR(f.CDR(pair)))(_(f.ZERO), _(f.ONE));
+}
+function SUM(nums) {
+    return f.REDUCE(f.ADD, f.ZERO, nums);
 }
 var SOLVE = module.exports.SOLVE = function SOLVE(a, b) {
-    return HAMMING(a, b, f.ZERO);
+    return SUM(f.MAP(HAMMING, f.ZIP(a, b)));
 }
 
