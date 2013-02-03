@@ -114,3 +114,6 @@ var REPEAT = module.exports.REPEAT = function REPEAT(num, ctor) {
             function(){ return CONS(ctor(), REPEAT(DECR(num), ctor)); });
 }
 
+var REVERSE = module.exports.REVERSE = function REVERSE(list) {
+    return REDUCE(function(rval, cur) { return CONS(cur, rval); }, NIL, list);
+}
