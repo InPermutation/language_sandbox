@@ -95,6 +95,12 @@ var REDUCE = module.exports.REDUCE = function REDUCE(fxn, v, list) {
         function() { return REDUCE(fxn, fxn(v, CAR(list)), CDR(list)); });
 }
 
+var MAP = module.exports.MAP = function MAP(fxn, list) {
+    return IS_NIL(list)(
+        _(NIL),
+        function() { return CONS(fxn(CAR(list)), MAP(fxn, CDR(list))); });
+};
+
 // this does the functional equivalent of list[index]++;
 var INCR_AT = module.exports.INCR_AT = function INCR_AT(index, list) {
     return IS_ZERO(index)(
