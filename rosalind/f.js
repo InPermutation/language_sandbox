@@ -144,3 +144,9 @@ var ZIP = module.exports.ZIP = function ZIP(l, r) {
                 ZIP(CDR(l), CDR(r)));
         });
 }
+
+var NOT = module.exports.NOT = function NOT(pred) {
+    return function(t, f) { 
+        return pred(f, t);
+    };
+}
