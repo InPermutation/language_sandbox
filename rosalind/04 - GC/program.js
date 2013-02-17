@@ -107,22 +107,39 @@ function PAIRUP(list) {
         });
 }
 
-// Coroutine: [dna, FASTALABEL...]
-// TODO: can have newlines in strands
 function STRAND(pbuf, dna) {
-    return EQ('\n', CAR(pbuf))(
-        function _COLABEL(){ return CONS(REVERSE(dna), PARSEFASTA(CDR(pbuf))); },
-        function _STRANDING(){ return STRAND(CDR(pbuf), CONS(CAR(pbuf), dna)); });
+    return IS_NIL(pbuf)(
+        function _EOF(){ return CONS(REVERSE(dna), NIL); },
+        function _ELSE(){
+            return EQ('\n', CAR(pbuf))(
+                function _NEWLINE(){ return NEWLINE(CDR(pbuf), dna); },
+                function _STRAND(){ return STRAND(CDR(pbuf), CONS(CAR(pbuf), dna)); });
+        });
 }
 
-// Coroutine: [label, STRAND...]
-function FASTALABEL(pbuf, label) {
-    return EQ('\n', CAR(pbuf))(
-        function _COSTRAND(){ return CONS(REVERSE(label), STRAND(CDR(pbuf), NIL)); },
-        function _LABELING(){ return FASTALABEL(CDR(pbuf), CONS(CAR(pbuf), label)); });
+function NEWLINE(pbuf, strand_r) {
+    return IS_NIL(pbuf)(
+        function _EOF(){ return CONS(REVERSE(strand_r), NIL); },
+        function _ELSE(){
+            return EQ('>', CAR(pbuf))(
+                function _LABEL(){ return CONS(REVERSE(strand_r), FASTALABEL(CDR(pbuf), NIL)); },
+                function _STRAND(){ return STRAND(pbuf, strand_r); });
+        });
 }
-        
-        
+       
+function FASTALABEL(pbuf, label) {
+    return IS_NIL(pbuf)(ERR('LABEL: found EOF'),
+        function(){
+            return EQ('\n', CAR(pbuf))(
+                function _LINE(){ return CONS(REVERSE(label), NEWLINE(CDR(pbuf), NIL)); },
+                function _ITER(){ return FASTALABEL(CDR(pbuf), CONS(CAR(pbuf), label)); });
+        });
+}
+
+function ERR(msg){
+    return function(){ throw msg; };
+}
+
 // Returns: LIST of LISTS; i.e. [label, dna, label, dna, ...]
 function PARSEFASTA(pbuf) {
     var d= IS_NIL(pbuf)(
@@ -130,7 +147,7 @@ function PARSEFASTA(pbuf) {
         function() { 
             return EQ(CAR(pbuf), '>')(
                 function _START() { return FASTALABEL(CDR(pbuf), NIL); },
-                function() { return 'error'; }
+                ERR('Should have started with >')
             );
         });
     return d;
